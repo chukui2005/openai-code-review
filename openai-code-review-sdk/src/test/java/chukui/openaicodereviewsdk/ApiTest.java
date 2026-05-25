@@ -2,7 +2,6 @@ package chukui.openaicodereviewsdk;
 
 import com.alibaba.fastjson2.JSON;
 import chukui.openaicodereviewsdk.domain.model.ChatCompletionSyncResponse;
-import chukui.openaicodereviewsdk.types.utils.BearerTokenUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,21 +15,19 @@ import org.junit.jupiter.api.Test;
 public class ApiTest {
 
     public static void main(String[] args) {
-        String apiKeySecret = "c78fbacd3e10118ad5649d7a54a3a163.UunYDBxpzeClvSKZ";
-        String token = BearerTokenUtils.getToken(apiKeySecret);
-        System.out.println(token);
+        String apiKey = "sk-d2215476239747ae940b1e17ae6c0b21";
+        System.out.println(apiKey);
     }
 
     @Test
     public void test_http() throws IOException {
-        String apiKeySecret = "c78fbacd3e10118ad5649d7a54a3a163.UunYDBxpzeClvSKZ";
-        String token = BearerTokenUtils.getToken(apiKeySecret);
+        String apiKey = "sk-d2215476239747ae940b1e17ae6c0b21";
 
-        URL url = new URL("https://open.bigmodel.cn/api/paas/v4/chat/completions");
+        URL url = new URL("https://api.deepseek.com/chat/completions");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Authorization", "Bearer " + token);
+        connection.setRequestProperty("Authorization", "Bearer " + apiKey);
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
         connection.setDoOutput(true);
@@ -38,7 +35,7 @@ public class ApiTest {
         String code = "1+1";
 
         String jsonInpuString = "{"
-                + "\"model\":\"glm-4-flash\","
+                + "\"model\":\"deepseek-chat\","
                 + "\"messages\": ["
                 + "    {"
                 + "        \"role\": \"user\","
