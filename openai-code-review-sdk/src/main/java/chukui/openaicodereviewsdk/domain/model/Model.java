@@ -2,7 +2,7 @@ package chukui.openaicodereviewsdk.domain.model;
 
 public enum Model {
 
-    DEEPSEEK_CHAT("deepseek-chat", "DeepSeek V2.5 最新稳定版，综合能力强"),
+    DEEPSEEK_V4_FLASH("deepseek-v4-flash", "DeepSeek V4 Flash 模型"),
     ;
 
     private final String code;

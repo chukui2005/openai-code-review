@@ -35,7 +35,7 @@ public class ApiTest {
         String code = "1+1";
 
         String jsonInpuString = "{"
-                + "\"model\":\"deepseek-chat\","
+                + "\"model\":\"deepseek-v4-flash\","
                 + "\"messages\": ["
                 + "    {"
                 + "        \"role\": \"user\","

@@ -56,7 +56,7 @@ public class OpenAiCodeReview {
         connection.setDoOutput(true);
 
         ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest();
-        chatCompletionRequest.setModel(Model.DEEPSEEK_CHAT.getCode());
+        chatCompletionRequest.setModel(Model.DEEPSEEK_V4_FLASH.getCode());
         chatCompletionRequest.setMessages(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 
