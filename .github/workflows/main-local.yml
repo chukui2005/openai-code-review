@@ -24,8 +24,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Run Java code
+      - name: Build and Run with Maven
         run: |
-          cd openai-code-review-sdk/src/main/java
-          javac chukui/openaicodereviewsdk/OpenAiCodeReview.java
-          java chukui.openaicodereviewsdk.OpenAiCodeReview
+          mvn clean install -DskipTests
+          java -jar ./openai-code-review-sdk/target/openai-code-review-sdk-0.0.1-SNAPSHOT.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}

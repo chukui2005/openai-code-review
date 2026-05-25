@@ -103,10 +103,16 @@ public class OpenAiCodeReview {
     }
 
     private static String writeLog(String token, String log) throws Exception {
+        // 清理上次残留的 repo 目录，避免 clone 冲突
+        File repoDir = new File("repo");
+        if (repoDir.exists()) {
+            deleteDirectory(repoDir);
+        }
+
         Git git = Git.cloneRepository()
                 .setURI("https://github.com/chukui2005/openai-code-review-log.git")
-                .setDirectory(new File("repo"))
-                .setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""))
+                .setDirectory(repoDir)
+                .setCredentialsProvider(new UsernamePasswordCredentialsProvider("token", token))
                 .call();
 
         String dateFolderName = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -123,11 +129,25 @@ public class OpenAiCodeReview {
 
         git.add().addFilepattern(dateFolderName + "/" + fileName).call();
         git.commit().setMessage("Add new file via GitHub Actions").call();
-        git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
+        git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider("token", token)).call();
 
         System.out.println("Changes have been pushed to the repository.");
 
         return "https://github.com/chukui2005/openai-code-review-log/blob/master/" + dateFolderName + "/" + fileName;
+    }
+
+    private static void deleteDirectory(File directory) {
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    deleteDirectory(file);
+                } else {
+                    file.delete();
+                }
+            }
+        }
+        directory.delete();
     }
 
     private static String generateRandomString(int length) {
