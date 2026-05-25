@@ -3,10 +3,10 @@ name: Run Java Git Diff By Local
 on:
   push:
     branches:
-      - master-close
+      - main
   pull_request:
     branches:
-      - master-close
+      - main
 
 jobs:
   build-and-run:
