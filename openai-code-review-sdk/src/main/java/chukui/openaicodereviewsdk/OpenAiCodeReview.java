@@ -22,12 +22,17 @@ public class OpenAiCodeReview {
                 getEnv("COMMIT_MESSAGE")
         );
 
-        WeiXin weiXin = new WeiXin(
-                getEnv("WEIXIN_APPID"),
-                getEnv("WEIXIN_SECRET"),
-                getEnv("WEIXIN_TOUSER"),
-                getEnv("WEIXIN_TEMPLATE_ID")
-        );
+        // 微信通知是可选的：只有配置了 WEIXIN_APPID 才启用
+        WeiXin weiXin = null;
+        String wxAppid = getEnvOptional("WEIXIN_APPID");
+        if (wxAppid != null && !wxAppid.isEmpty()) {
+            weiXin = new WeiXin(
+                    wxAppid,
+                    getEnv("WEIXIN_SECRET"),
+                    getEnv("WEIXIN_TOUSER"),
+                    getEnv("WEIXIN_TEMPLATE_ID")
+            );
+        }
 
         IOpenAI openAI = new DeepSeek(
                 getEnv("DEEPSEEK_API_KEY"),
@@ -43,9 +48,13 @@ public class OpenAiCodeReview {
     private static String getEnv(String key) {
         String value = System.getenv(key);
         if (null == value || value.isEmpty()) {
-            throw new RuntimeException("value is null");
+            throw new RuntimeException(key + " is not configured");
         }
         return value;
+    }
+
+    private static String getEnvOptional(String key) {
+        return System.getenv(key);
     }
 
 }

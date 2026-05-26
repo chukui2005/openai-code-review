@@ -28,7 +28,7 @@ jobs:
         run: mkdir -p ./libs
 
       - name: Download openai-code-review-sdk JAR
-        run: wget -O ./libs/openai-code-review-sdk-0.0.1-SNAPSHOT.jar https://github.com/chukui2005/openai-code-review/releases/download/v1.0/openai-code-review-sdk-0.0.1-SNAPSHOT.jar
+        run: wget -O ./libs/openai-code-review-sdk-2.0.0.jar https://github.com/chukui2005/openai-code-review/releases/download/v2.0/openai-code-review-sdk-2.0.0.jar
 
       - name: Get repository name
         id: repo-name
@@ -47,7 +47,7 @@ jobs:
         run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
 
       - name: Run Code Review
-        run: java -jar ./libs/openai-code-review-sdk-0.0.1-SNAPSHOT.jar
+        run: java -jar ./libs/openai-code-review-sdk-2.0.0.jar
         env:
           GITHUB_REVIEW_LOG_URI: https://github.com/chukui2005/openai-code-review-log
           GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}

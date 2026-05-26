@@ -73,15 +73,17 @@ public class ApiTest {
 
     @Test
     public void test_wx() {
-        String accessToken = WXAccessTokenUtils.getAccessToken();
-        System.out.println(accessToken);
+        // 注意：这里需要换成你自己的微信 AppID 和 Secret
+        // String accessToken = WXAccessTokenUtils.getAccessToken("你的AppID", "你的Secret");
+        // System.out.println(accessToken);
 
         Message message = new Message();
         message.put("project","big-market");
         message.put("review","feat: 新加功能");
 
-        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s", accessToken);
-        sendPostRequest(url, JSON.toJSONString(message));
+        // 测试时先注释掉下面这行，避免没有 accessToken 时报错
+        // String url = String.format("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s", accessToken);
+        // sendPostRequest(url, JSON.toJSONString(message));
     }
 
     private static void sendPostRequest(String urlString, String jsonBody) {

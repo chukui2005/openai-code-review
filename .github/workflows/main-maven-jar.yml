@@ -28,7 +28,7 @@ jobs:
         run: mvn clean install
 
       - name: Copy openai-code-review-sdk JAR
-        run: mvn dependency:copy -Dartifact=chukui:openai-code-review-sdk:0.0.1-SNAPSHOT -DoutputDirectory=./libs
+        run: mvn dependency:copy -Dartifact=chukui:openai-code-review-sdk:2.0.0 -DoutputDirectory=./libs
 
       - name: Get repository name
         id: repo-name
@@ -47,7 +47,7 @@ jobs:
         run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
 
       - name: Run Code Review
-        run: java -jar ./libs/openai-code-review-sdk-0.0.1-SNAPSHOT.jar
+        run: java -jar ./libs/openai-code-review-sdk-2.0.0.jar
         env:
           GITHUB_REVIEW_LOG_URI: https://github.com/chukui2005/openai-code-review-log
           GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
