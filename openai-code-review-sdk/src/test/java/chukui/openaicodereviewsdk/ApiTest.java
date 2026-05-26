@@ -1,7 +1,7 @@
 package chukui.openaicodereviewsdk;
 
 import com.alibaba.fastjson2.JSON;
-import chukui.openaicodereviewsdk.domain.model.ChatCompletionSyncResponse;
+import chukui.openaicodereviewsdk.infrastructure.openai.dto.ChatCompletionSyncResponseDTO;
 import chukui.openaicodereviewsdk.types.utils.WXAccessTokenUtils;
 
 import java.io.BufferedReader;
@@ -67,7 +67,7 @@ public class ApiTest {
         in.close();
         connection.disconnect();
 
-        ChatCompletionSyncResponse response = JSON.parseObject(content.toString(), ChatCompletionSyncResponse.class);
+        ChatCompletionSyncResponseDTO response = JSON.parseObject(content.toString(), ChatCompletionSyncResponseDTO.class);
         System.out.println(response.getChoices().get(0).getMessage().getContent());
     }
 

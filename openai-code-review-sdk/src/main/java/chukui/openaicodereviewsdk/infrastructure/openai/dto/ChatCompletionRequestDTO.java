@@ -1,8 +1,10 @@
-package chukui.openaicodereviewsdk.domain.model;
+package chukui.openaicodereviewsdk.infrastructure.openai.dto;
+
+import chukui.openaicodereviewsdk.domain.model.Model;
 
 import java.util.List;
 
-public class ChatCompletionRequest {
+public class ChatCompletionRequestDTO {
 
     private String model = Model.DEEPSEEK_V4_FLASH.getCode();
     private List<Prompt> messages;

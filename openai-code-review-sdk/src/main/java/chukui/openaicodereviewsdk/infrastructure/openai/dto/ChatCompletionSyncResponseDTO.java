@@ -1,8 +1,8 @@
-package chukui.openaicodereviewsdk.domain.model;
+package chukui.openaicodereviewsdk.infrastructure.openai.dto;
 
 import java.util.List;
 
-public class ChatCompletionSyncResponse {
+public class ChatCompletionSyncResponseDTO {
 
     private List<Choice> choices;
 
