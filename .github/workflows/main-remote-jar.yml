@@ -3,10 +3,10 @@ name: Build and Run OpenAiCodeReview By Main Maven Jar
 on:
   push:
     branches:
-      - main-close
+      - main
   pull_request:
     branches:
-      - main-close
+      - main
 
 jobs:
   build:
@@ -24,11 +24,11 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Create libs directory
+        run: mkdir -p ./libs
 
-      - name: Copy openai-code-review-sdk JAR
-        run: mvn dependency:copy -Dartifact=chukui:openai-code-review-sdk:0.0.1-SNAPSHOT -DoutputDirectory=./libs
+      - name: Download openai-code-review-sdk JAR
+        run: wget -O ./libs/openai-code-review-sdk-0.0.1-SNAPSHOT.jar https://github.com/chukui2005/openai-code-review/releases/download/v1.0/openai-code-review-sdk-0.0.1-SNAPSHOT.jar
 
       - name: Get repository name
         id: repo-name
