@@ -42,8 +42,21 @@ public class GitCommand {
         logReader.close();
         logProcess.waitFor();
 
-        ProcessBuilder diffProcessBuilder = new ProcessBuilder("git", "diff", latestCommitHash + "^",
-                latestCommitHash);
+        // 检查是否有父 commit，没有就对比空树（首次提交）
+        ProcessBuilder parentCheckBuilder = new ProcessBuilder("git", "rev-parse", "--verify", "--quiet",
+                latestCommitHash + "^");
+        parentCheckBuilder.directory(new File("."));
+        Process parentCheckProcess = parentCheckBuilder.start();
+        int parentCheckExitCode = parentCheckProcess.waitFor();
+
+        String diffBase;
+        if (parentCheckExitCode != 0) {
+            diffBase = "4b825dc642cb6eb9a060e54bf899d153036d5e7a"; // Git 空树
+        } else {
+            diffBase = latestCommitHash + "^";
+        }
+
+        ProcessBuilder diffProcessBuilder = new ProcessBuilder("git", "diff", diffBase, latestCommitHash);
         diffProcessBuilder.directory(new File("."));
         Process diffProcess = diffProcessBuilder.start();
 
