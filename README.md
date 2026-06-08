@@ -8,15 +8,11 @@
 
 ### 2. 修改两处地址
 
-打开 `code-review.yml`，修改以下两个地方：
+打开 `code-review.yml`，修改**日志仓库地址**为你自己的：
 
 ```yaml
-# ① 把下载地址改成你的 SDK 所在仓库
-- run: curl -L -o ./libs/xxx.jar https://github.com/你的用户名/openai-code-review/releases/download/v2.0/openai-code-review-sdk-2.0.0.jar
-
-# ② 把日志仓库地址改成你自己的
 env:
-  GITHUB_REVIEW_LOG_URI: https://github.com/你的用户名/你的日志仓库名
+  GITHUB_REVIEW_LOG_URI: https://github.com/你的用户名/openai-code-review-log
 ```
 
 ### 3. 在 GitHub 上配置 Secrets
